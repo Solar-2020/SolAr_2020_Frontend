@@ -1,0 +1,8 @@
+# IDE files
+.idea
+.vscode
+
+# Project files
+node_modules
+dist
+coverage
