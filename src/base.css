@@ -1,3 +1,17 @@
-.hello {
-    background-color: red;
+:root {
+    --main-gren-color : #18B043;
+    --main-light-green: #25EC14;
+    --main-grey-text-color: #808080;
+    --main-text-color: #2F2F2F;
+    --border-color: #CCCCCC;
+    --main-background-color: #F2F2F2;
+    --background-light-green: #CDF4CA;
+    --cards-background: #FFFFFF;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-background-color);
 }

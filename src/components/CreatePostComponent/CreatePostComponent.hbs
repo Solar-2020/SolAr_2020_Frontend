@@ -1,0 +1,24 @@
+<div id="createPostComponent" class="create-post-component">
+    <div id="createPostComponetWhitePart" class="create-post-component__white-part">
+        <div id="createPostComponentAvatarAndText" class="create-post-component__white-part__avatar-text">
+            <div class="create-post-component__white-part__avatar-text__avatar"></div>
+            <textarea id="createPostComponentText" class="create-post-component__white-part__avatar-text__text"></textarea>
+        </div>
+        <div id="createPostComponentInterviewPlace"></div>
+        <div id="createPostComponentPaymentPlace"></div>
+        <div id="createPostComponentImagesPlace"></div>
+        <div id="createPostComponentDoctPlace"></div>
+    </div>
+    <div id="createPostComponentGreenPart" class="create-post-component__green-part">
+        <input type="button" id="createPostComponentGreenPartPhoto" value="photo" onclick="document.getElementById('createPostComponentGreenPartAddPhoto').click();" class="">
+        <input type="file" name="addPostPhoto" id="createPostComponentGreenPartAddPhoto" accept="image/png, image/jpeg, image/gif" style="display: none;">
+
+        <input type="button" id="createPostComponentGreenPartDocAdd" value="doc" onclick="document.getElementById('createPostComponentGreenPartDoc').click();" class="">
+        <input type="file" name="addPostDoc" id="createPostComponentGreenPartDoc" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf" style="display: none;">
+
+        <button id="createPostComponentGreenPartInterview" class="">Survey</button>
+        <button id="createPostComponentGreenPartpayment" class="">Payment</button>
+
+        <button id="createPostComponentGreenPartButton">Опубликовать</button>
+    </div>
+</div>
