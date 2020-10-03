@@ -44,7 +44,7 @@ export default class GroupView extends BaseView {
      */
     getContext() {
         return {
-            groupTitle: 'Название группы',
+            groupTitle: 'Name of the fucking group',
             groupCount: '10',
         };
     }
