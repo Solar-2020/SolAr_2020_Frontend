@@ -1,0 +1,13 @@
+.intervoew-component {
+    border-top: 1px solid var(--border-color);
+    margin-top: 30px;
+}
+
+.interview-component__answers {
+    margin-top: 5px;
+}
+
+.interview-component__title {
+    display: flex;
+    flex-direction: row;
+}

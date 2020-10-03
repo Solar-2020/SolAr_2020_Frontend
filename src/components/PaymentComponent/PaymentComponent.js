@@ -43,6 +43,8 @@ export default class PaymentComponent {
      */
     addDestroyListener() {
         document.getElementById('paymentComponentContainerCloseButton').addEventListener('click', (e) =>{
+            e.preventDefault();
+
             this.destroy();
         });
     }

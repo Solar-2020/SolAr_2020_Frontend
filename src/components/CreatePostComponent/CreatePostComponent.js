@@ -2,6 +2,9 @@ import './CreatePostComponent.css';
 import CreatePostTemplate from './CreatePostComponent.hbs';
 
 import PaymentComponent from '../PaymentComponent/PaymentComponent.js';
+import InterviewComponent from '../InterviewComponent/InterviewComponent.js';
+
+import {BACKEND_ADDRESS} from '../../config/config.js';
 
 /** Class representing a CreatePost component. */
 export default class CreatePostComponent {
@@ -13,6 +16,9 @@ export default class CreatePostComponent {
     constructor(parent = document.body) {
         this._parent = parent;
         this._data = {};
+
+        this._interview = null;
+        this._payment = null;
     }
 
     /**
@@ -37,6 +43,10 @@ export default class CreatePostComponent {
      * add listeners
      */
     addListeners() {
+        this._interview = new InterviewComponent(document.getElementById('createPostComponentInterviewPlace'));
+        this._payment = new PaymentComponent(document.getElementById('createPostComponentPaymentPlace'));
+        document.getElementById('createPostComponentText').value = '';
+
         this.clickGetPhoto();
         this.clickGetDoc();
         this.clickCreateInterview();
@@ -49,7 +59,29 @@ export default class CreatePostComponent {
      */
     clickGetPhoto() {
         document.getElementById('createPostComponentGreenPartAddPhoto').addEventListener('change', (e) => {
-            console.log('file!');
+            e.preventDefault();
+
+            const formData = new FormData();
+
+            formData.append('body', JSON.stringify({name: e.target.files[0].name}));
+            formData.append('file', e.target.files[0]);
+
+            fetch(
+                BACKEND_ADDRESS + '/upload/photo',
+                {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors',
+                    credentials: 'include',
+                }
+            )
+                .then((response) => {
+                    console.log(response);
+                    // return response.json();
+                })
+                .then((json) => {
+                    console.log(json);
+                });
         });
     }
 
@@ -58,7 +90,31 @@ export default class CreatePostComponent {
      */
     clickGetDoc() {
         document.getElementById('createPostComponentGreenPartDoc').addEventListener('change', (e) => {
+            e.preventDefault();
+
             console.log('doc!');
+
+            const formData = new FormData();
+
+            formData.append('body', JSON.stringify({name: e.target.files[0].name}));
+            formData.append('file', e.target.files[0]);
+
+            fetch(
+                BACKEND_ADDRESS + '/upload/file',
+                {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors',
+                    credentials: 'include',
+                }
+            )
+                .then((response) => {
+                    console.log(response);
+                    // return response.json();
+                })
+                .then((json) => {
+                    console.log(json);
+                });
         });
     }
 
@@ -67,7 +123,9 @@ export default class CreatePostComponent {
      */
     clickCreateInterview() {
         document.getElementById('createPostComponentGreenPartInterview').addEventListener('click', (e) => {
-            console.log('survey!');
+            e.preventDefault();
+
+            this._interview.render();
         });
     }
 
@@ -76,10 +134,9 @@ export default class CreatePostComponent {
      */
     clickCreatePayment() {
         document.getElementById('createPostComponentGreenPartpayment').addEventListener('click', (e) => {
-            console.log('payment!');
+            e.preventDefault();
 
-            const payment = new PaymentComponent(document.getElementById('createPostComponentPaymentPlace'));
-            payment.render();
+            this._payment.render();
         });
     }
 
@@ -88,7 +145,43 @@ export default class CreatePostComponent {
      */
     clickCreatePublish() {
         document.getElementById('createPostComponentGreenPartButton').addEventListener('click', (e) => {
+            e.preventDefault();
+
             console.log('publish!');
+
+            const post = {
+                groupID: 1,
+                test: document.getElementById('createPostComponentText').value,
+                interviews: this._interview.getData(),
+                photos: [],
+                files: [],
+                payments: [{
+                    cost: 300,
+                    currency: 1,
+                }],
+            };
+
+            console.log(post);
+
+            fetch(
+                BACKEND_ADDRESS + '/posts/post',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(post),
+                    mode: 'no-cors',
+                    credentials: 'include',
+                    header: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+                .then((response) => {
+                    console.log(response);
+                    // return response.json();
+                })
+                .then((json) => {
+                    console.log(json);
+                });
         });
     }
 }
