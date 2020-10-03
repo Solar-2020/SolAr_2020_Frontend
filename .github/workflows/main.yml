@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - 'dep/*'
   pull_request:
     branches:
       - main
@@ -34,4 +35,4 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: "html/"
+          TARGET: "html/${GITHUB_REF##*/}"
