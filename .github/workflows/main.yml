@@ -3,12 +3,14 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - main      # allow no subdomain at all
       - develop
-      - 'dep/*'
+      - predev
+      - 'dep/*'   # GITHUB_REF will be what * replaces
   pull_request:
     branches:
       - main
+      - develop
 
 jobs:
   build_deploy_with_npm:
